@@ -5,6 +5,7 @@ import SearchInput from '../components/SearchInput'
 
 export default function Home({ countries }) {
   const [keyword, setKeyword] = useState('')
+
   const filteredCountries = countries.filter(
     country =>
       country.name.toLowerCase().includes(keyword) ||
@@ -14,6 +15,10 @@ export default function Home({ countries }) {
 
   const onSearch = e => {
     setKeyword(e.target.value.toLowerCase())
+  }
+
+  if (typeof window !== 'undefined' && !localStorage.getItem('theme')) {
+    localStorage.setItem('theme', 'light')
   }
 
   return (

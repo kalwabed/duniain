@@ -136,6 +136,9 @@ const Index = ({ children, title = 'Ranking Dunia' }) => {
 
           cursor: pointer;
         }
+        .theme-switcher:hover {
+          color: var(--text-color);
+        }
       `}</style>
     </div>
   )
