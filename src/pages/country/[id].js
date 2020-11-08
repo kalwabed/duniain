@@ -72,20 +72,22 @@ const Country = ({ country }) => {
 
             <div className="detail-panel-row">
               <div className="detail-panel-label">Gini</div>
-              <div className="detail-panel-value">{country.gini} %</div>
+              <div className="detail-panel-value">{country.gini || 0} %</div>
             </div>
 
             <div className="detail-panel-borders">
               <div className="detail-panel-borders-label">Neighbouring Countries</div>
               <div className="detail-panel-borders-container">
-                {borders.map(({ name, flag, alpha3Code }) => (
-                  <Link href={`/country/${alpha3Code}`} key={flag}>
-                    <a className="detail-panel-borders-country">
-                      <img src={flag} alt={name} />
-                      <div className="detail-panel-name">{name}</div>
-                    </a>
-                  </Link>
-                ))}
+                {borders.length !== 0 &&
+                  borders.map(({ name, flag, alpha3Code }) => (
+                    <Link href={`/country/${alpha3Code}`} key={flag}>
+                      <a className="detail-panel-borders-country">
+                        <img src={flag} alt={name} />
+                        <div className="detail-panel-name">{name}</div>
+                      </a>
+                    </Link>
+                  ))}
+                {borders.length === 0 && <p>Nothing to display</p>}
               </div>
             </div>
           </div>
