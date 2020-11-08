@@ -2,7 +2,7 @@ import Head from 'next/head'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 
-const Index = ({ children, title = 'Ranking Dunia' }) => {
+const Index = ({ children, title = 'duniain' }) => {
   const [theme, setTheme] = useState('light')
 
   useEffect(() => {
