@@ -1,12 +1,24 @@
 import Layout from '../../components/Layout'
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
+import Link from 'next/link'
 
 const getCountry = async id => {
   return await (await fetch(`https://restcountries.eu/rest/v2/alpha/${id}`)).json()
 }
 
-const Country = ({ country, borders }) => {
+const Country = ({ country }) => {
+  const [borders, setBorders] = useState([])
+
+  const getBorders = async () => {
+    const result = await Promise.all(country.borders.map(border => getCountry(border)))
+    setBorders(result)
+  }
+
+  useEffect(() => {
+    getBorders()
+  }, [country])
+
   return (
     <Layout title={country.name}>
       <div className="container">
@@ -19,11 +31,11 @@ const Country = ({ country, borders }) => {
             <div className="overview-numbers">
               <div className="overview-population">
                 <div className="overview-value">{country.population}</div>
-                <div className="overview-label">Populations</div>
+                <div className="overview-label">Population</div>
               </div>
               <div className="overview-area">
                 <div className="overview-value">{country.area}</div>
-                <div className="overview-label"></div>
+                <div className="overview-label">Area</div>
               </div>
             </div>
           </div>
@@ -66,12 +78,13 @@ const Country = ({ country, borders }) => {
             <div className="detail-panel-borders">
               <div className="detail-panel-borders-label">Neighbouring Countries</div>
               <div className="detail-panel-borders-container">
-                {borders.map(({ name, flag }) => (
-                  <div key={flag} className="detail-panel-borders-country">
-                    <img src={flag} alt={name} />
-
-                    <div className="detail-panel-name">{name}</div>
-                  </div>
+                {borders.map(({ name, flag, alpha3Code }) => (
+                  <Link href={`/country/${alpha3Code}`} key={flag}>
+                    <a className="detail-panel-borders-country">
+                      <img src={flag} alt={name} />
+                      <div className="detail-panel-name">{name}</div>
+                    </a>
+                  </Link>
                 ))}
               </div>
             </div>
@@ -192,11 +205,23 @@ const Country = ({ country, borders }) => {
   )
 }
 
-export const getServerSideProps = async ({ params }) => {
-  const country = await getCountry(params.id)
-  const borders = await Promise.all(country.borders.map(border => getCountry(border)))
+export const getStaticPaths = async () => {
+  const countries = await (await fetch('https://restcountries.eu/rest/v2/all')).json()
+
   return {
-    props: { country, borders }
+    paths: countries.map(country => ({
+      params: {
+        id: country.alpha3Code
+      }
+    })),
+    fallback: false
+  }
+}
+
+export const getStaticProps = async ({ params }) => {
+  const country = await getCountry(params.id)
+  return {
+    props: { country }
   }
 }
 

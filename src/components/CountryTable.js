@@ -18,39 +18,22 @@ const SortArrow = ({ direction }) => {
   if (direction === 'desc') {
     return (
       <div className="heading-arrow">
-        <svg height="18" viewBox="0 0 21 21" width="21" xmlns="http://www.w3.org/2000/svg">
-          <g
-            fill="none"
-            fill-rule="evenodd"
-            stroke="#2a2e3b"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            transform="translate(6 4)"
-          >
-            <path
-              d="m7.328 6.67.001 5.658-5.658-.001"
-              transform="matrix(-.70710678 .70710678 .70710678 .70710678 .965201 -.399799)"
-            />
-            <path d="m4.5.5v13" />
-          </g>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M11.0001 3.67157L13.0001 3.67157L13.0001 16.4999L16.2426 13.2574L17.6568 14.6716L12 20.3284L6.34314 14.6716L7.75735 13.2574L11.0001 16.5001L11.0001 3.67157Z"
+            fill="currentColor"
+          />
         </svg>
       </div>
     )
   } else {
     return (
       <div className="heading-arrow">
-        <svg xmlns="http://www.w3.org/2000/svg" width="21" height="18" viewBox="0 0 21 21">
-          <g
-            fill="none"
-            fill-rule="evenodd"
-            stroke="#2A2E3B"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            transform="translate(6 3)"
-          >
-            <polyline points="7.324 1.661 7.324 7.318 1.647 7.339" transform="scale(1 -1) rotate(45 15.35 0)" />
-            <line x1="4.5" x2="4.5" y1=".5" y2="13.5" />
-          </g>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M17.6568 8.96219L16.2393 10.3731L12.9843 7.10285L12.9706 20.7079L10.9706 20.7059L10.9843 7.13806L7.75404 10.3532L6.34314 8.93572L12.0132 3.29211L17.6568 8.96219Z"
+            fill="currentColor"
+          />
         </svg>
       </div>
     )

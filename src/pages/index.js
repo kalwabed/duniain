@@ -4,7 +4,6 @@ import Layout from '../components/Layout'
 import SearchInput from '../components/SearchInput'
 
 export default function Home({ countries }) {
-  console.log(countries)
   const [keyword, setKeyword] = useState('')
   const filteredCountries = countries.filter(
     country =>
