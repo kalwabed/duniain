@@ -2,6 +2,7 @@ import Layout from '../../components/Layout'
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
+import { comma } from 'number-magic'
 
 const getCountry = async id => {
   return await (await fetch(`https://restcountries.eu/rest/v2/alpha/${id}`)).json()
@@ -9,7 +10,6 @@ const getCountry = async id => {
 
 const Country = ({ country }) => {
   const [borders, setBorders] = useState([])
-
   const getBorders = async () => {
     const result = await Promise.all(country.borders.map(border => getCountry(border)))
     setBorders(result)
@@ -30,11 +30,11 @@ const Country = ({ country }) => {
 
             <div className="overview-numbers">
               <div className="overview-population">
-                <div className="overview-value">{country.population}</div>
+                <div className="overview-value">{comma(country.population)}</div>
                 <div className="overview-label">Population</div>
               </div>
               <div className="overview-area">
-                <div className="overview-value">{country.area}</div>
+                <div className="overview-value">{comma(country.area)}</div>
                 <div className="overview-label">Area</div>
               </div>
             </div>

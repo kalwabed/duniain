@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { useState } from 'react'
+import { comma } from 'number-magic'
 
 const orderBy = (countries, value, direction) => {
   if (direction === 'asc') {
@@ -92,8 +93,8 @@ const CountryTable = ({ countries }) => {
               <img src={country.flag} alt={country.name} />
             </div>
             <div className="c-name">{country.name}</div>
-            <div className="c-population">{country.population}</div>
-            <div className="c-area">{country.area || 0}</div>
+            <div className="c-population">{comma(country.population)}</div>
+            <div className="c-area">{comma(country.area) || 0}</div>
             <div className="c-gini">{country.gini || 0}%</div>
           </a>
         </Link>
